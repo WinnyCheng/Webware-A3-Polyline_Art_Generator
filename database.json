@@ -9,5 +9,175 @@
       "username": "youareyu",
       "password": "asianyu"
     }
-  ]
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    },
+    {
+      "id": 1,
+      "title": "lowdb"
+    }
+  ],
+  "user": {
+    "name": "typicode"
+  },
+  "count": 25
 }

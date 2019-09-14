@@ -48,14 +48,8 @@ const appdata = [
 const users = [
   {username: 'admin', password: 'iammi'}
 ]
-db.defaults({ appdata: appdata, users: users}).write()
+db.defaults({ appdata: appdata, users: users }).write()
 
-app.get('/getDrawings', function (req, res) {
-  console.log(db.get('appdata'))
-  const type = mime.getType( appdata ) 
-  res.writeHeader(200, { 'Content-Type': type })
-  res.end(JSON.stringify(appdata));
-})
 
 function randPoints(numPoints){
   let pointlist = []
@@ -79,8 +73,6 @@ function randTri(numPoly, numPoints){
              
 app.use( express.static(dir) )
 app.use( bodyParser.json() )
-
-
 
 const myLocalStrategy = function( username, password, done ){
   const user = users.find( __user => __user.username === username )
@@ -110,30 +102,30 @@ passport.deserializeUser( ( username, done ) => {
   }
 })
 
-// app.get( '/getDrawings', function( request, response) {
-//   const type = mime.getType( appdata ) 
-//   response.writeHeader(200, { 'Content-Type': type })
-//   response.end(JSON.stringify(appdata));
-// })
-// app.post( '/generate', function( request, response ) {
-//   let data = request.body
-//   //generate random number for points
-//   let points = randPoints(data.vertices)
-//   let triangles = randTri(data.numPoly, data.vertices)
+app.get( '/getDrawings', function( request, response) {
+  const type = mime.getType( appdata ) 
+  response.writeHeader(200, { 'Content-Type': type })
+  response.end(JSON.stringify(appdata));
+})
+app.post( '/generate', function( request, response ) {
+  let data = request.body
+  //generate random number for points
+  let points = randPoints(data.vertices)
+  let triangles = randTri(data.numPoly, data.vertices)
 
-//   let drawing = {
-//     "vertices": data.vertices, 
-//     "numPoly": data.numPoly, 
-//     "name": data.name,
-//     "points": points,
-//     "triangles": triangles
-//   }
+  let drawing = {
+    "vertices": data.vertices, 
+    "numPoly": data.numPoly, 
+    "name": data.name,
+    "points": points,
+    "triangles": triangles
+  }
 
-//   appdata.push(drawing)
+  appdata.push(drawing)
   
-//   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
-//   response.end()
-// })
+  response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+  response.end()
+})
 app.post( '/delete', function( request, response ) {
   let index = request.body.index
   appdata.splice(index, 1)
