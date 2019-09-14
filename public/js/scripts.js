@@ -19,6 +19,8 @@ const login = function(e){
     }
     else{
       document.getElementById("errorMessage").innerText = "incorrect username or password"
+      document.getElementById("user").value = null
+      document.getElementById("password").value = null
     }
   })
   fetch( '/test', {

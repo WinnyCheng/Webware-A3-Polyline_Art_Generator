@@ -11,6 +11,8 @@ const express = require( 'express' ),
       FileAsync = require('lowdb/adapters/FileAsync')
 
 const adapter = new FileAsync('database.json')
+const db = low(adapter)
+
 const appdata = [
   { "vertices": 8, 
     "numPoly": 12,
@@ -144,8 +146,6 @@ app.post( '/update', function( request, response ) {
 app.post( '/login',
          passport.authenticate( 'local'),
          function( request, response ) {
-            console.log( 'user:', request.body.username)
-            console.log( 'password:', request.body.password)
             response.json( { status: true })
           })
 
