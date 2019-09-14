@@ -17,6 +17,12 @@ const login = function(e){
     //   document.getElementById("loginPage").style.display = "none";
     //   document.getElementById("page").style.display = "";
   })
+  // fetch( '/test', {
+  //   method:'POST',
+  //   credentials: 'include'
+  // })
+  // .then( console.log )
+  // .catch( err => console.error ) 
 }
 
 const generate = function(e) {
