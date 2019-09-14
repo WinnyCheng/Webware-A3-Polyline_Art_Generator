@@ -15,7 +15,8 @@
                 7, 0, 7, 3, 6, 2, 3, 6, 3, 7, 4, 0, 1, 4, 1, 5]}
   ],
   "users": [
-  
+    {username: 'iammi', password: 'asianmi'},
+    {username: 'youareyu', password: 'asianyu'}
   ],
   "count": 0
 }

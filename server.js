@@ -14,8 +14,7 @@ const adapter = new FileAsync('database.json')
 
 low(adapter).then(db => {
   app.post('/generate', (req, res)=> {
-    console.log(req.body)
-    db.get('drawings').push(req.body).write().then( res.send() )
+    console.log(db.get('users'))
   })
 })
 
@@ -74,7 +73,7 @@ app.use( bodyParser.json() )
 
 const users = [
   {username: 'iammi', password: 'asianmi'},
-  {username: 'youareyu', password: 'asianyu'},
+  {username: 'youareyu', password: 'asianyu'}
 ]
 
 const myLocalStrategy = function( username, password, done ){
