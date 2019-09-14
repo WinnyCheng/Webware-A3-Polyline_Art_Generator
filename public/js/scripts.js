@@ -6,7 +6,8 @@ const generate = function(e) {
   
   fetch( '/generate', {
     method:'POST',
-    body 
+    body,
+    headers: { 'Content-Type': 'applicaion/json' }
   })
   .then( function( response) {
     getData()
