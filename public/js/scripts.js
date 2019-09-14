@@ -1,3 +1,7 @@
+const login = function(e){
+  
+}
+
 const generate = function(e) {
   // prevent default form action from being carried out
   e.preventDefault()
@@ -124,6 +128,8 @@ function updateData(index){
 
 
 window.onload = function() {
+  const loginBtn = document.getElementById("login")
+  loginBtn.onclick = login
   getData()
   const genBtn = document.getElementById("generate")
   genBtn.onclick = generate
