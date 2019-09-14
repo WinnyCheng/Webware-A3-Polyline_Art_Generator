@@ -3,7 +3,6 @@ const express = require( 'express' ),
       session = require( 'express-session' ),
       passport = require( 'passport' ),
       local = require( 'passport-local' ).Strategy,
-      flash = require('connect-flash'),
       bodyParser = require( 'body-parser' ),
       mime = require( 'mime' ),
       dir  = 'public/',
@@ -61,7 +60,6 @@ function randTri(numPoly, numPoints){
              
 app.use( express.static(dir) )
 app.use( bodyParser.json() )
-app.use(flash())
 
 const users = [
   {username: 'iammi', password: 'asianmi'},
@@ -78,7 +76,7 @@ const myLocalStrategy = function( username, password, done ){
     return done(null, false, { message: 'incorrect password' })
 }
 
-passport.use( new local( { passReqToCallBack: true }, myLocalStrategy ))
+passport.use( new local( myLocalStrategy ))
 app.use( session({ secret:'cats cats cats', resave:false, saveUninitialized:false }) )
 app.use( passport.initialize() )
 app.use( passport.session() )
@@ -141,9 +139,7 @@ app.post( '/update', function( request, response ) {
 })
 
 app.post( '/login',
-         passport.authenticate( 'local', { successRedirect: '/', 
-                                          faliureRedirect: '/login',
-                                         failureFlash: true}),
+         passport.authenticate( 'local'),
          function( request, response ) {
             console.log( 'user:', request.body.username)
             console.log( 'password:', request.body.password)

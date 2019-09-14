@@ -13,9 +13,13 @@ const login = function(e){
   })
   .then( function( response ) {
     console.log(response)
-    // if( response.status === true)
-    //   document.getElementById("loginPage").style.display = "none";
-    //   document.getElementById("page").style.display = "";
+    if( response.status === 200){
+      document.getElementById("loginPage").style.display = "none";
+      document.getElementById("page").style.display = "";
+    }
+    else{
+      document.getElementById("errorMessage").innerText = "incorrect username or password"
+    }
   })
   fetch( '/test', {
     method:'POST',
