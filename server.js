@@ -43,12 +43,19 @@ const appdata = [
     "name": "This is Art!", 
     "points": randPoints(5),
     "triangles": randTri(5, 5),
-    "user"},
+    "user": "admin"},
 ]
 const users = [
   {username: 'admin', password: 'iammi'}
 ]
 db.defaults({ appdata: appdata, users: users}).write()
+
+app.get('/getDrawings', function (req, res) {
+  console.log(db.get('appdata'))
+  const type = mime.getType( appdata ) 
+  res.writeHeader(200, { 'Content-Type': type })
+  res.end(JSON.stringify(appdata));
+})
 
 function randPoints(numPoints){
   let pointlist = []
@@ -103,11 +110,11 @@ passport.deserializeUser( ( username, done ) => {
   }
 })
 
-app.get( '/getDrawings', function( request, response) {
-  const type = mime.getType( appdata ) 
-  response.writeHeader(200, { 'Content-Type': type })
-  response.end(JSON.stringify(appdata));
-})
+// app.get( '/getDrawings', function( request, response) {
+//   const type = mime.getType( appdata ) 
+//   response.writeHeader(200, { 'Content-Type': type })
+//   response.end(JSON.stringify(appdata));
+// })
 // app.post( '/generate', function( request, response ) {
 //   let data = request.body
 //   //generate random number for points
