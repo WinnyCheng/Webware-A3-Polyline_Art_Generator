@@ -4,10 +4,6 @@ const express = require( 'express' ),
       passport = require( 'passport' ),
       local = require( 'passport-local' ).Strategy,
       bodyParser = require( 'body-parser' ),
-      http = require( 'http' ),
-      fs   = require( 'fs' ),
-      // IMPORTANT: you must run `npm install` in the directory for this assignment
-      // to install the mime library used in the following line of code
       mime = require( 'mime' ),
       dir  = 'public/',
       port = 3000
@@ -74,7 +70,6 @@ app.get( '/getDrawings', function( request, response) {
 app.post( '/generate', function( request, response ) {
   let data = request.body
   //generate random number for points
-  
   let points = randPoints(data.vertices)
   let triangles = randTri(data.numPoly, data.vertices)
 
@@ -87,119 +82,25 @@ app.post( '/generate', function( request, response ) {
   }
 
   appdata.push(drawing)
-
-  console.log("generated")
   
   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
   response.end()
 })
-app.post( '/generate', function( request, response ) {
-  
+app.post( '/delete', function( request, response ) {
+  let index = request.body
+  appdata.splice(index, 1)
+  response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+  response.end()
 })
-app.post( '/update', function( request, re))
+app.post( '/update', function( request, response ) {
+  let newData = request.body
+  let idx = newData.idx
+
+  appdata[idx].vertices = newData.vertices
+  appdata[idx].numPoly = newData.numPoly
+  appdata[idx].name = newData.name
+  appdata[idx].points = randPoints(newData.vertices)
+  appdata[idx].triangles = randTri(newData.numPoly, newData.vertices)
+})
 
 app.listen( process.env.PORT || port )
-
-const server = http.createServer( function( request,response ) {
-  if( request.method === 'GET' ) {
-    handleGet( request, response )    
-  }else if( request.method === 'POST' ){
-    handlePost( request, response ) 
-  }
-})
-
-const handleGet = function( request, response ) {
-  const filename = dir + request.url.slice( 1 ) 
-
-  if( request.url === '/' ) {
-    sendFile( response, 'public/index.html' )
-  }
-  else if( request.url === '/getDrawings'){
-    const type = mime.getType( appdata ) 
-    response.writeHeader(200, { 'Content-Type': type })
-    response.end(JSON.stringify(appdata));
-  }
-  else{
-    sendFile( response, filename )
-  }
-}
-
-const handlePost = function( request, response ) {
-  let dataString = ''
-
-  request.on( 'data', function( data ) {
-      dataString += data 
-  })
-
-  request.on( 'end', function() {
-    switch(request.url){
-      case '/generate':
-        let data = JSON.parse(dataString)
-        //generate random number for points
-        let points = randPoints(data.vertices)
-        let triangles = randTri(data.numPoly, data.vertices)
-        
-        let drawing = {
-          "vertices": data.vertices, 
-          "numPoly": data.numPoly, 
-          "name": data.name,
-          "points": points,
-          "triangles": triangles
-        }
-        
-        appdata.push(drawing)
-        
-        response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
-        response.end()
-        break
-        
-      case '/delete':
-        let index = JSON.parse(dataString)
-        appdata.splice(index, 1)
-        response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
-        response.end()
-        break
-        
-      case '/update':
-        let newData = JSON.parse(dataString)
-        let idx = newData.idx
-        
-        appdata[idx].vertices = newData.vertices
-        appdata[idx].numPoly = newData.numPoly
-        appdata[idx].name = newData.name
-        appdata[idx].points = randPoints(newData.vertices)
-        appdata[idx].triangles = randTri(newData.numPoly, newData.vertices)
-        
-        break
-    }
-    
-    // ... do something with the data here!!!
-
-    response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
-    response.end()
-  })
-}
-
-const sendFile = function( response, filename ) {
-   const type = mime.getType( filename ) 
-
-   fs.readFile( filename, function( err, content ) {
-
-     // if the error = null, then we've loaded the file successfully
-     if( err === null ) {
-
-       // status code: https://httpstatuses.com
-       response.writeHeader( 200, { 'Content-Type': type })
-       response.end( content )
-
-     }else{
-
-       // file not found, error code 404
-       response.writeHeader( 404 )
-       response.end( '404 Error: File Not Found' )
-
-     }
-   })
-}
-
-//server.listen( process.env.PORT || port )
