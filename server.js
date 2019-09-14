@@ -65,7 +65,41 @@ function randTri(numPoly, numPoints){
 app.use( express.static(dir) )
 app.use( bodyParser.json() )
 
-app.listen( process.env.PORT || 1337 )
+app.get( '/getDrawings', function( request, response) {
+  const type = mime.getType( appdata ) 
+  response.writeHeader(200, { 'Content-Type': type })
+  response.end(JSON.stringify(appdata));
+})
+
+app.post( '/generate', function( request, response ) {
+  let dataString = ''
+
+  request.on( 'data', function( data ) {
+      dataString += data 
+  })
+  
+  let data = JSON.parse(dataString)
+  //generate random number for points
+  let points = randPoints(data.vertices)
+  let triangles = randTri(data.numPoly, data.vertices)
+
+  let drawing = {
+    "vertices": data.vertices, 
+    "numPoly": data.numPoly, 
+    "name": data.name,
+    "points": points,
+    "triangles": triangles
+  }
+
+  appdata.push(drawing)
+
+  console.log("generated")
+  
+  response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+  response.end()
+})
+
+app.listen( process.env.PORT || port )
 
 const server = http.createServer( function( request,response ) {
   if( request.method === 'GET' ) {
@@ -169,4 +203,4 @@ const sendFile = function( response, filename ) {
    })
 }
 
-server.listen( process.env.PORT || port )
+//server.listen( process.env.PORT || port )
