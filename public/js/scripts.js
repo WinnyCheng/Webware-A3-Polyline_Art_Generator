@@ -110,14 +110,15 @@ function deleteData(index){
 function updateData(index){
   const input = grabInput("numPolyE", "verticesE", "nameE")
   input.idx = index
-  const body = JSON.stringify(input)
+  const data = JSON.stringify(input)
   
   fetch( '/update', {
     method:'POST',
     headers: { 'Content-Type': 'application/json' },
-    body 
+    body: data
   })
   .then( function( response) {
+    console.log("updated")
     getData()
   })
   return false

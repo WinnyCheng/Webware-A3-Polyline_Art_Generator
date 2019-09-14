@@ -91,10 +91,9 @@ app.post( '/generate', function( request, response ) {
 })
 app.post( '/delete', function( request, response ) {
   let index = request.body.index
-  console.log(index)
-  // appdata.splice(index, 1)
-  // response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
-  // response.end()
+  appdata.splice(index, 1)
+  response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+  response.end()
 })
 app.post( '/update', function( request, response ) {
   let newData = request.body
@@ -105,6 +104,9 @@ app.post( '/update', function( request, response ) {
   appdata[idx].name = newData.name
   appdata[idx].points = randPoints(newData.vertices)
   appdata[idx].triangles = randTri(newData.numPoly, newData.vertices)
+  
+  response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+  response.end()
 })
 
 app.listen( process.env.PORT || port )
