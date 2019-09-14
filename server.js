@@ -77,7 +77,22 @@ const myLocalStrategy = function( username, password, done ){
 }
 
 passport.use( new local( myLocalStrategy ))
-passport.initialize()
+app.use( session({ secret:'cats cats cats', resave:false, saveUninitialized:false }) )
+app.use( passport.initialize() )
+app.use( passport.session() )
+
+passport.serializeUser( ( user, done ) => done( null, user.username ) )
+
+passport.deserializeUser( ( username, done ) => {
+  const user = users.find( u => u.username === username )
+  console.log( 'deserializing:', name )
+  
+  if( user !== undefined ) {
+    done( null, user )
+  }else{
+    done( null, false, { message:'user not found; session not restored' })
+  }
+})
 
 app.get( '/getDrawings', function( request, response) {
   const type = mime.getType( appdata ) 
@@ -130,5 +145,10 @@ app.post( '/login',
             console.log( 'password:', request.body.pass)
             response.json( { status: true })
           })
+
+app.post('/test', function( req, res ) {
+  console.log( 'authenticate with cookie?', req.user )
+  res.json({ status:'success' })
+})
 
 app.listen( process.env.PORT || port )
