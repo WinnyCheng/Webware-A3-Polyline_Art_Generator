@@ -85,7 +85,7 @@ passport.serializeUser( ( user, done ) => done( null, user.username ) )
 
 passport.deserializeUser( ( username, done ) => {
   const user = users.find( u => u.username === username )
-  console.log( 'deserializing:', name )
+  console.log( 'deserializing:', username )
   
   if( user !== undefined ) {
     done( null, user )
@@ -141,8 +141,8 @@ app.post( '/update', function( request, response ) {
 app.post( '/login',
          passport.authenticate( 'local'),
          function( request, response ) {
-            console.log( 'user:', request.body.user)
-            console.log( 'password:', request.body.pass)
+            console.log( 'user:', request.body.username)
+            console.log( 'password:', request.body.password)
             response.json( { status: true })
           })
 
