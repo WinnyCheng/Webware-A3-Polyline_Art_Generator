@@ -1,18 +1,16 @@
 const generate = function(e) {
   // prevent default form action from being carried out
   e.preventDefault()
-  
   const data = JSON.stringify(grabInput("numPoly", "vertices", "name"))
   
   fetch( '/generate', {
     method:'POST',
-    body: data,
-    headers: { 'Content-Type': 'applicaion/json' }
+    headers: { 'Content-Type': 'application/json' },
+    body: data
   })
   .then( function( response) {
     getData()
   })
-  
   return false
 }
 
