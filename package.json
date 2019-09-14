@@ -4,9 +4,10 @@
   "description": "",
   "author": "",
   "scripts": {
-    "start": "node server.improved.js"
+    "start": "node server.js"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "mime": "^2.4.4"
   }
 }

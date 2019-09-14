@@ -1,4 +1,6 @@
-const http = require( 'http' ),
+const express = require( 'express' ),
+      app = express(),
+      http = require( 'http' ),
       fs   = require( 'fs' ),
       // IMPORTANT: you must run `npm install` in the directory for this assignment
       // to install the mime library used in the following line of code
