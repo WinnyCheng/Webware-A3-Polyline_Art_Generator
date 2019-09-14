@@ -2,11 +2,11 @@ const generate = function(e) {
   // prevent default form action from being carried out
   e.preventDefault()
   
-  const body = JSON.stringify(grabInput("numPoly", "vertices", "name"))
+  const data = JSON.stringify(grabInput("numPoly", "vertices", "name"))
   
   fetch( '/generate', {
     method:'POST',
-    body,
+    body: data,
     headers: { 'Content-Type': 'applicaion/json' }
   })
   .then( function( response) {

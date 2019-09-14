@@ -87,8 +87,6 @@ app.post( '/generate', function( request, response ) {
   }
 
   appdata.push(drawing)
-
-  console.log("generated")
   
   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
   response.end()
