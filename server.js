@@ -10,46 +10,40 @@ const express = require( 'express' ),
       low = require('lowdb'),
       FileSync = require('lowdb/adapters/FileSync')
 
-const adapter = new FileSync('database.json')
+const adapter = new FileSync('db.json')
 const db = low(adapter)
 
 const appdata = [
-  { "vertices": 8, 
-    "numPoly": 12,
-    "name": "Cube",
-    "points": [[-0.5, -0.5, -0.5, 1], 
-               [0.5, -0.5, -0.5, 1], 
-               [0.5, 0.5, -0.5, 1], 
-               [-0.5, 0.5, -0.5, 1], 
-               [-0.5, -0.5, 0.5, 1], 
-               [0.5, -0.5, 0.5, 1],
-               [0.5, 0.5, 0.5, 1],
-               [-0.5, 0.5, 0.5, 1]],
-   "triangles":[3, 2, 1, 3, 1, 0, 6, 7, 4, 6, 4, 5, 5, 1, 2, 5, 2, 6, 0, 4,
+  { vertices: 8, 
+    numPoly: 12,
+    name: "Cube",
+    points: [[-0.5, -0.5, -0.5, 1], 
+             [0.5, -0.5, -0.5, 1], 
+             [0.5, 0.5, -0.5, 1], 
+             [-0.5, 0.5, -0.5, 1], 
+             [-0.5, -0.5, 0.5, 1], 
+             [0.5, -0.5, 0.5, 1],
+             [0.5, 0.5, 0.5, 1],
+             [-0.5, 0.5, 0.5, 1]],
+    triangles: [3, 2, 1, 3, 1, 0, 6, 7, 4, 6, 4, 5, 5, 1, 2, 5, 2, 6, 0, 4,
                 7, 0, 7, 3, 6, 2, 3, 6, 3, 7, 4, 0, 1, 4, 1, 5],
-  "user": "admin"},
-  
-  { "vertices": 4, 
-    "numPoly": 4, 
-    "name": "Triangular Pyramid", 
-    "points": [[0.0, 1.0, -0.5, 1],
-               [-1.0, -0.5, -0.5, 1],
-               [1.0, -0.5, -0.5, 1],
-               [0.0, 0.0, 0.5, 1]],
-    "triangles": [0, 3, 2, 2, 3, 1, 1, 3, 0, 0, 1, 2],
-    "user": "admin"},
-  { "vertices": 5, 
-    "numPoly": 5, 
-    "name": "This is Art!", 
-    "points": randPoints(5),
-    "triangles": randTri(5, 5),
-    "user": "admin"},
+    user: "admin"},
+  { vertices: 4, 
+    numPoly: 4, 
+    name: "Triangular Pyramid", 
+    points: [[0.0, 1.0, -0.5, 1],
+             [-1.0, -0.5, -0.5, 1],
+             [1.0, -0.5, -0.5, 1],
+             [0.0, 0.0, 0.5, 1]],
+    triangles: [0, 3, 2, 2, 3, 1, 1, 3, 0, 0, 1, 2],
+    user: "admin"}
 ]
 const users = [
   {username: 'admin', password: 'iammi'}
 ]
-db.defaults({ appdata: appdata, users: users }).write()
+db.defaults({ post: appdata, user: users }).write()
 
+console.log(db.get('user').value())
 
 function randPoints(numPoints){
   let pointlist = []
