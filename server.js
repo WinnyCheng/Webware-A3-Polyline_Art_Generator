@@ -10,6 +10,7 @@ const express = require( 'express' ),
       low = require('lowdb'),
       FileAsync = require('lowdb/adapters/FileAsync')
 
+const adapter = new FileAsync('database.json')
 const appdata = [
   { "vertices": 8, 
     "numPoly": 12,
