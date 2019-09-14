@@ -11,8 +11,12 @@ const express = require( 'express' ),
       FileAsync = require('lowdb/adapters/FileAsync')
 
 const adapter = new FileAsync('database.json')
+
 low(adapter).then(db => {
-  
+  app.post('/generate', (req, res)=> {
+    console.log(req.body)
+    db.get('drawings').push(req.body).write().then( res.send() )
+  })
 })
 
 const appdata = [
@@ -106,25 +110,25 @@ app.get( '/getDrawings', function( request, response) {
   response.writeHeader(200, { 'Content-Type': type })
   response.end(JSON.stringify(appdata));
 })
-app.post( '/generate', function( request, response ) {
-  let data = request.body
-  //generate random number for points
-  let points = randPoints(data.vertices)
-  let triangles = randTri(data.numPoly, data.vertices)
+// app.post( '/generate', function( request, response ) {
+//   let data = request.body
+//   //generate random number for points
+//   let points = randPoints(data.vertices)
+//   let triangles = randTri(data.numPoly, data.vertices)
 
-  let drawing = {
-    "vertices": data.vertices, 
-    "numPoly": data.numPoly, 
-    "name": data.name,
-    "points": points,
-    "triangles": triangles
-  }
+//   let drawing = {
+//     "vertices": data.vertices, 
+//     "numPoly": data.numPoly, 
+//     "name": data.name,
+//     "points": points,
+//     "triangles": triangles
+//   }
 
-  appdata.push(drawing)
+//   appdata.push(drawing)
   
-  response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
-  response.end()
-})
+//   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+//   response.end()
+// })
 app.post( '/delete', function( request, response ) {
   let index = request.body.index
   appdata.splice(index, 1)
