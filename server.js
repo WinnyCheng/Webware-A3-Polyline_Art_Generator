@@ -76,7 +76,7 @@ const myLocalStrategy = function( username, password, done ){
     return done(null, false, { message: 'incorrect password' })
 }
 
-passport.use( new local( myLocalStrategy ))
+passport.use( new local( {usernameField: 'username', passwordField: 'password'}, myLocalStrategy ))
 passport.initialize()
 
 app.get( '/getDrawings', function( request, response) {
@@ -123,7 +123,7 @@ app.post( '/update', function( request, response ) {
   response.end()
 })
 app.post( '/login',
-         (req, res) => passport.authenticate( 'local'),
+         passport.authenticate( 'local'),
          function( request, response ) {
             console.log( 'user:', request.body.user)
             console.log( 'password:', request.body.pass)
