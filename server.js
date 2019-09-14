@@ -7,10 +7,9 @@ const express = require( 'express' ),
       mime = require( 'mime' ),
       dir  = 'public/',
       port = 3000,
-      low = require('lowdb'),
-      FileAsync = require('lowdb/adapters/FileAsync')
+      low = require('lowdb')
 
-const adapter = new FileAsync('database.json')
+
 
 low(adapter).then(db => {
   app.post('/generate', (req, res)=> {
