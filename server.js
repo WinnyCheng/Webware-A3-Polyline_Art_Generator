@@ -68,15 +68,15 @@ const users = [
 
 const myLocalStrategy = function( username, password, done ){
   const user = users.find( __user => __user.username === username )
-  if( user === undefined )
-    return done(null, false, { message: 'user not found'})
+  if( user === undefined ){
+    return done(null, false, { message: 'user not found'})}
   else if( user.password === password )
     return done( null, { username, password })
   else
     return done(null, false, { message: 'incorrect password' })
 }
 
-passport.use( new local( {usernameField: 'username', passwordField: 'password'}, myLocalStrategy ))
+passport.use( new local( myLocalStrategy ))
 passport.initialize()
 
 app.get( '/getDrawings', function( request, response) {
