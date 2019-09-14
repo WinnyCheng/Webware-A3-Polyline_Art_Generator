@@ -37,10 +37,6 @@ const appdata = [
     "points": randPoints(5),
     "triangles": randTri(5, 5)},
 ]
-// const users = [
-//   {username: '', password: ''},
-//   {username: '', password: ''},
-// ]
 
 function randPoints(numPoints){
   let pointlist = []
@@ -60,6 +56,15 @@ function randTri(numPoly, numPoints){
     triangles.push(Math.floor(Math.random()*numPoints))
   }
   return triangles
+}
+
+const users = [
+  {username: 'iammi', password: 'asianmi'},
+  {username: 'youareyu', password: 'asianyu'},
+]
+
+const myLocalStrategy = function( username, password, done ){
+  const user = users.find( __user => __user.username === username )
 }
 
 app.use( express.static(dir) )

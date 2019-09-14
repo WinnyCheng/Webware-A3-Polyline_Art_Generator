@@ -86,7 +86,6 @@ function drawData(index){
   })
   .then( function(data){
     let shape = data[index]
-    console.log(shape)
     initialize(shape.vertices, shape.points, shape.numPoly, shape.triangles)
   })
 }
@@ -118,7 +117,6 @@ function updateData(index){
     body: data
   })
   .then( function( response) {
-    console.log("updated")
     getData()
   })
   return false
