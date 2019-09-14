@@ -74,7 +74,7 @@ app.get( '/getDrawings', function( request, response) {
 app.post( '/generate', function( request, response ) {
   let data = request.body
   //generate random number for points
-  console.log(data)
+  
   let points = randPoints(data.vertices)
   let triangles = randTri(data.numPoly, data.vertices)
 
@@ -87,10 +87,16 @@ app.post( '/generate', function( request, response ) {
   }
 
   appdata.push(drawing)
+
+  console.log("generated")
   
   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
   response.end()
 })
+app.post( '/generate', function( request, response ) {
+  
+})
+app.post( '/update', function( request, re))
 
 app.listen( process.env.PORT || port )
 
