@@ -6,7 +6,9 @@ const express = require( 'express' ),
       bodyParser = require( 'body-parser' ),
       mime = require( 'mime' ),
       dir  = 'public/',
-      port = 3000
+      port = 3000,
+      low = require('lowdb'),
+      FileAsync = require('lowdb/adapters/FileAsync')
 
 const appdata = [
   { "vertices": 8, 
