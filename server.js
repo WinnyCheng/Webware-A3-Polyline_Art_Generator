@@ -72,13 +72,7 @@ app.get( '/getDrawings', function( request, response) {
 })
 
 app.post( '/generate', function( request, response ) {
-  let dataString = ''
-
-  request.on( 'data', function( data ) {
-      dataString += data 
-  })
-  
-  let data = JSON.parse(dataString)
+  let data = request.body
   //generate random number for points
   let points = randPoints(data.vertices)
   let triangles = randTri(data.numPoly, data.vertices)
