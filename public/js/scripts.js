@@ -1,5 +1,13 @@
 const login = function(e){
+  e.preventDefault()
+  let username = document.getElementById("user").value
+  let password = document.getElementById("password").value
   
+  const data = JSON.stringify({ user: username, pass: password })
+  
+  fetch( 'login', {
+    me
+  })
 }
 
 const generate = function(e) {
