@@ -37,6 +37,10 @@ const appdata = [
     "points": randPoints(5),
     "triangles": randTri(5, 5)},
 ]
+// const users = [
+//   {username: '', password: ''},
+//   {username: '', password: ''},
+// ]
 
 function randPoints(numPoints){
   let pointlist = []
@@ -66,7 +70,6 @@ app.get( '/getDrawings', function( request, response) {
   response.writeHeader(200, { 'Content-Type': type })
   response.end(JSON.stringify(appdata));
 })
-
 app.post( '/generate', function( request, response ) {
   let data = request.body
   //generate random number for points
@@ -87,10 +90,11 @@ app.post( '/generate', function( request, response ) {
   response.end()
 })
 app.post( '/delete', function( request, response ) {
-  let index = request.body
-  appdata.splice(index, 1)
-  response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
-  response.end()
+  let index = request.body.index
+  console.log(index)
+  // appdata.splice(index, 1)
+  // response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+  // response.end()
 })
 app.post( '/update', function( request, response ) {
   let newData = request.body

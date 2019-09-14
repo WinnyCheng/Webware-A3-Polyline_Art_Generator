@@ -96,9 +96,10 @@ function editData(index){
 }
 
 function deleteData(index){
-  const body = JSON.stringify( index )
+  const body = JSON.stringify( { index: index } )
   fetch( '/delete', {
     method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body
   })
   .then( function( response) {
@@ -113,6 +114,7 @@ function updateData(index){
   
   fetch( '/update', {
     method:'POST',
+    headers: { 'Content-Type': 'application/json' },
     body 
   })
   .then( function( response) {
