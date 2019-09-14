@@ -7,15 +7,11 @@ const express = require( 'express' ),
       mime = require( 'mime' ),
       dir  = 'public/',
       port = 3000,
-      low = require('lowdb')
+      low = require('lowdb'),
+      FileSync = require('lowdb/adapters/FileSync')
 
-
-
-low(adapter).then(db => {
-  app.post('/generate', (req, res)=> {
-    console.log(db.get('users'))
-  })
-})
+const adapter = new FileSync('database.json')
+const db = low(adapter)
 
 const appdata = [
   { "vertices": 8, 
@@ -30,7 +26,8 @@ const appdata = [
                [0.5, 0.5, 0.5, 1],
                [-0.5, 0.5, 0.5, 1]],
    "triangles":[3, 2, 1, 3, 1, 0, 6, 7, 4, 6, 4, 5, 5, 1, 2, 5, 2, 6, 0, 4,
-                7, 0, 7, 3, 6, 2, 3, 6, 3, 7, 4, 0, 1, 4, 1, 5]},
+                7, 0, 7, 3, 6, 2, 3, 6, 3, 7, 4, 0, 1, 4, 1, 5],
+  "user": "admin"},
   
   { "vertices": 4, 
     "numPoly": 4, 
@@ -39,13 +36,19 @@ const appdata = [
                [-1.0, -0.5, -0.5, 1],
                [1.0, -0.5, -0.5, 1],
                [0.0, 0.0, 0.5, 1]],
-    "triangles": [0, 3, 2, 2, 3, 1, 1, 3, 0, 0, 1, 2]},
+    "triangles": [0, 3, 2, 2, 3, 1, 1, 3, 0, 0, 1, 2],
+    "user": "admin"},
   { "vertices": 5, 
     "numPoly": 5, 
     "name": "This is Art!", 
     "points": randPoints(5),
-    "triangles": randTri(5, 5)},
+    "triangles": randTri(5, 5),
+    "user"},
 ]
+const users = [
+  {username: 'admin', password: 'iammi'}
+]
+db.defaults({ appdata: appdata, users: users}).write()
 
 function randPoints(numPoints){
   let pointlist = []
@@ -70,10 +73,7 @@ function randTri(numPoly, numPoints){
 app.use( express.static(dir) )
 app.use( bodyParser.json() )
 
-const users = [
-  {username: 'iammi', password: 'asianmi'},
-  {username: 'youareyu', password: 'asianyu'}
-]
+
 
 const myLocalStrategy = function( username, password, done ){
   const user = users.find( __user => __user.username === username )
