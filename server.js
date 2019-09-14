@@ -122,6 +122,7 @@ app.post( '/update', function( request, response ) {
   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
   response.end()
 })
+
 app.post( '/login',
          passport.authenticate( 'local'),
          function( request, response ) {
@@ -129,27 +130,5 @@ app.post( '/login',
             console.log( 'password:', request.body.pass)
             response.json( { status: true })
           })
-
-passport.serializeUser( ( user, done ) => done( null, user.username ) )
-
-passport.deserializeUser( ( username, done ) => {
-  const user = users.find( u => u.username === username )
-  console.log( 'deserializing:', name )
-  
-  if( user !== undefined ) {
-    done( null, user )
-  }else{
-    done( null, false, { message:'user not found; session not restored' })
-  }
-})
-
-app.use( session({ secret:'cats cats cats', resave:false, saveUninitialized:false }) )
-app.use( passport.initialize() )
-app.use( passport.session() )
-
-app.post('/test', function( req, res ) {
-  console.log( 'authenticate with cookie?', req.user )
-  res.json({ status:'success' })
-})
 
 app.listen( process.env.PORT || port )

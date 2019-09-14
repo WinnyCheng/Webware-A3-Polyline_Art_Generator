@@ -3,7 +3,7 @@ const login = function(e){
   let username = document.getElementById("user").value
   let password = document.getElementById("password").value
   
-  const data = JSON.stringify({ user: username, pass: password })
+  const data = JSON.stringify({ username: username, password: password })
   console.log(data)
   
   fetch( '/login', {
