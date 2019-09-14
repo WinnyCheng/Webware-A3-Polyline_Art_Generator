@@ -122,7 +122,7 @@ app.post( '/update', function( request, response ) {
   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
   response.end()
 })
-app.post( '/login', function( request, response ) {
+app.post( '/login', passport.authenticate( 'local' ), function( request, response ) {
   response.json( { status: true })
 })
 
