@@ -65,8 +65,17 @@ const users = [
 
 const myLocalStrategy = function( username, password, done ){
   const user = users.find( __user => __user.username === username )
+  if( user === undefined )
+    return done(null, false, { message: 'user not found'})
+  else if( user.password === password )
+    return done( null, { username, password })
+  else
+    return done(null, false, { message: 'incorrect password' })
 }
 
+passport.use( new local( myLocalStrategy ))
+passport.initialize()
+             
 app.use( express.static(dir) )
 app.use( bodyParser.json() )
 
@@ -112,6 +121,9 @@ app.post( '/update', function( request, response ) {
   
   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
   response.end()
+})
+app.post( '/login', function( request, response ) {
+  response.json( { status: true })
 })
 
 app.listen( process.env.PORT || port )
