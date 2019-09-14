@@ -5,15 +5,16 @@ const login = function(e){
   
   const data = JSON.stringify({ user: username, pass: password })
   
-  fetch( 'login', {
+  fetch( '/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: data
   })
   .then( function( response ) {
-    if( response.status === true)
-      document.getElementById("loginPage").style.display = "none";
-      document.getElementById("page").style.display = "";
+    console.log(response)
+    // if( response.status === true)
+    //   document.getElementById("loginPage").style.display = "none";
+    //   document.getElementById("page").style.display = "";
   })
 }
 

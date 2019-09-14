@@ -123,6 +123,8 @@ app.post( '/update', function( request, response ) {
   response.end()
 })
 app.post( '/login', passport.authenticate( 'local' ), function( request, response ) {
+  console.log( 'user:', request.user)
+  console.log( 'password:', request.pass)
   response.json( { status: true })
 })
 
