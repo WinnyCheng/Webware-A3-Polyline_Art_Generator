@@ -1,5 +1,9 @@
 const express = require( 'express' ),
       app = express(),
+      session = require( 'express-session' ),
+      passport = require( 'passport' ),
+      local = require( 'passport-local' ).Strategy,
+      bodyParser = require( 'body-parser' ),
       http = require( 'http' ),
       fs   = require( 'fs' ),
       // IMPORTANT: you must run `npm install` in the directory for this assignment
@@ -57,6 +61,11 @@ function randTri(numPoly, numPoints){
   }
   return triangles
 }
+
+app.use( express.static(dir) )
+app.use( bodyParser.json() )
+
+app.listen( process.env.PORT || 1337 )
 
 const server = http.createServer( function( request,response ) {
   if( request.method === 'GET' ) {
