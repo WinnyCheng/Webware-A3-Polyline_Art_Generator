@@ -57,6 +57,9 @@ function randTri(numPoly, numPoints){
   }
   return triangles
 }
+             
+app.use( express.static(dir) )
+app.use( bodyParser.json() )
 
 const users = [
   {username: 'iammi', password: 'asianmi'},
@@ -75,9 +78,6 @@ const myLocalStrategy = function( username, password, done ){
 
 passport.use( new local( myLocalStrategy ))
 passport.initialize()
-             
-app.use( express.static(dir) )
-app.use( bodyParser.json() )
 
 app.get( '/getDrawings', function( request, response) {
   const type = mime.getType( appdata ) 
@@ -122,10 +122,13 @@ app.post( '/update', function( request, response ) {
   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
   response.end()
 })
-app.post( '/login', passport.authenticate( 'local' ), function( request, response ) {
-  console.log( 'user:', request.user)
-  console.log( 'password:', request.pass)
-  response.json( { status: true })
-})
+app.post( '/login',
+         passport.authenticate( 'local' ),
+         function( request, response ) {
+            console.log( 'user:', request.body.user)
+            console.log( 'password:', request.body.pass)
+            response.json( { status: true })
+          }
+        )
 
 app.listen( process.env.PORT || port )

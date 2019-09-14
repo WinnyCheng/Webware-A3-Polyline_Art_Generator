@@ -4,6 +4,7 @@ const login = function(e){
   let password = document.getElementById("password").value
   
   const data = JSON.stringify({ user: username, pass: password })
+  console.log(data)
   
   fetch( '/login', {
     method: 'POST',
