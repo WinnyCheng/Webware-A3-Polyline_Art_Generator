@@ -49,12 +49,18 @@ const newUser = function(e) {
     body: data
   })
   .then( function( response ) {
-    console.log(response.status)
-    document.getElementById('username').innerText = "User: " + username
-    document.getElementById("loginPage").style.display = "none";
-    document.getElementById("page").style.display = "";
-    document.getElementById("page2").style.display = "";
-    getData()
+    if(response.status === 200){
+      document.getElementById('username').innerText = "User: " + username
+      document.getElementById("loginPage").style.display = "none";
+      document.getElementById("page").style.display = "";
+      document.getElementById("page2").style.display = "";
+      getData()
+    }
+    else{
+      document.getElementById("errorMessage").innerText = "* user already exists *"
+      document.getElementById("user").value = null
+      document.getElementById("password").value = null
+    }
   })
   return false
 }

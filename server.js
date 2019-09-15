@@ -148,8 +148,8 @@ app.post( '/update', function( request, response ) {
 
 app.post( '/createUser', (req, res) => {
   let user = db.get("users").filter({ username: req.body.username})
-  console.log(user.value())
-  if(user.isEmpty()){
+  console.log(user.value().length)
+  if(user.value().length === 0){
     db.get('users').push(req.body).write()
 
     res.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
