@@ -117,6 +117,8 @@ app.post( '/generate', function( request, response ) {
 
   db.get('post').push(drawing).write()
   
+  console.log(db.get('post').value())
+  
   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
   response.end()
 })
@@ -139,6 +141,8 @@ app.post( '/update', function( request, response ) {
     points: randPoints(newData.vertices),
     triangles: randTri(newData.numPoly, newData.vertices)
   }).write()
+  
+  console.log(db.get('post').value())
   
   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
   response.end()
