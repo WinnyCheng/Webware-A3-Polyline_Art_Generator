@@ -33,9 +33,15 @@ label {
   color: white;
 }
 table {
-  cell-spacing: 100px 100px;
+  margin-bottom: 75px;
   display:flex;
   justify-content: center;
+}
+th, td{
+  padding-right: 20px;
+}
+td{
+  align-text: center
 }
 canvas{
   background: black;
