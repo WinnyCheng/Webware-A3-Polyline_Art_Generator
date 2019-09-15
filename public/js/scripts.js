@@ -17,6 +17,7 @@ const login = function(e){
       document.getElementById('username').innerText = "User: " + username
       document.getElementById("loginPage").style.display = "none";
       document.getElementById("page").style.display = "";
+      document.getElementById("page2").style.display = "";
       getData()
     }
     else{
@@ -51,6 +52,7 @@ const newUser = function(e) {
     document.getElementById('username').innerText = "User: " + username
     document.getElementById("loginPage").style.display = "none";
     document.getElementById("page").style.display = "";
+    document.getElementById("page2").style.display = "";
     getData()
   })
   return false
@@ -59,6 +61,7 @@ const newUser = function(e) {
 const logUserOut = function(){
   document.getElementById("loginPage").style.display = "";
   document.getElementById("page").style.display = "none";
+  document.getElementById("page2").style.display = "none";
   document.getElementById("user").value = null
   document.getElementById("password").value = null
 }
