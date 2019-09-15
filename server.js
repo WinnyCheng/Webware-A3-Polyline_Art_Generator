@@ -147,10 +147,18 @@ app.post( '/update', function( request, response ) {
 })
 
 app.post( '/createUser', (req, res) => {
- db.get('users').push(req.body).write()
-  
-  res.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
-  res.end()
+  let user = db.get("users").filter({ username: req.body.username})
+  console.log(user.value())
+  if(user.isEmpty()){
+    db.get('users').push(req.body).write()
+
+    res.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+    res.end()
+  }
+  else{
+    res.writeHead( 422, "OK", {'Content-Type': 'text/plain' })
+    res.end()
+  }
 })
 app.post( '/login',
          passport.authenticate( 'local'),
@@ -162,7 +170,5 @@ app.post('/test', function( req, res ) {
   console.log( 'authenticate with cookie?', req.user )
   res.json({ status:'success' })
 })
-
-console.log(db.get("post").value())
 
 app.listen( process.env.PORT || port )

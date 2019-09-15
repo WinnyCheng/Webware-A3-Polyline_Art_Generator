@@ -49,6 +49,7 @@ const newUser = function(e) {
     body: data
   })
   .then( function( response ) {
+    console.log(response.status)
     document.getElementById('username').innerText = "User: " + username
     document.getElementById("loginPage").style.display = "none";
     document.getElementById("page").style.display = "";
