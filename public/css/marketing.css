@@ -36,6 +36,13 @@ table{
   display: flex;
   justify-content: center;
 }
+canvas{
+  background: black;
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  border: 10px solid #34495e;
+}
 
 /*
  * -- LAYOUT STYLES --
@@ -83,6 +90,7 @@ table{
     color: white;
     padding: 0.5em 2em;
     border-radius: 5px;
+    border: 5px solid #34495e;
 }
 
 a.pure-button-primary {
