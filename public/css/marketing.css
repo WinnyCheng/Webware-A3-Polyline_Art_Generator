@@ -29,6 +29,10 @@ label {
     height: auto;
 }
 
+td{
+  margin-left: 50px;
+}
+
 /*
  * -- LAYOUT STYLES --
  * These are some useful classes which I will need
