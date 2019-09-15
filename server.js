@@ -42,7 +42,6 @@ const users = [
   {username: 'admin', password: 'iammi'}
 ]
 db.defaults({ post: appdata, user: users }).write()
-console.log(db.get('post').value())
 
 function randPoints(numPoints){
   let pointlist = []
@@ -116,10 +115,10 @@ app.post( '/generate', function( request, response ) {
     "user": data.user
   }
 
-  db.get('post').value().push(drawing).write().then(function(response) {
-    response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
-    response.end()
-  })
+  db.get('post').push(drawing).write()
+  console.log(db.get('post').value())
+  response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+  response.end()
 })
 app.post( '/delete', function( request, response ) {
   let index = request.body.index
