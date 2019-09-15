@@ -21,6 +21,32 @@
         <!--[if gt IE 8]><!-->
             <link rel="stylesheet" href="css/marketing.css">
         <!--<![endif]-->
+  <script id="vshader" type="x-shader/x-vertex">
+
+      attribute vec4 vPosition;
+      attribute vec4 vColor;
+      uniform float vPointSize;
+      uniform mat4 projMatrix;
+      uniform mat4 modelMatrix;
+      uniform mat4 viewMatrix;
+      varying vec4 fColor;
+
+      void main() {
+        gl_Position = projMatrix * viewMatrix * modelMatrix * vPosition;
+        gl_PointSize = vPointSize;
+        fColor = vColor;
+      }
+  	</script>
+
+    <script id="fshader" type="x-shader/x-fragment">
+      precision mediump float;
+	    varying vec4 fColor;
+
+    	void main()
+	    {
+	      gl_FragColor = fColor;
+  	  }
+	  </script>
 </head>
 <body>
 
@@ -124,32 +150,60 @@
     </div>
 
     <div class="content">
-        <h2 class="content-head is-center"></h2>
+        <h2 class="content-head is-center">Sign in or create a new user</h2>
 
         <div class="pure-g">
             <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
                 <form class="pure-form pure-form-stacked">
                     <fieldset>
 
-                        <label for="name">Your Userame</label>
-                        <input id="name" type="text" placeholder="userame">
+                        <label for="user">Your Userame</label>
+                        <input id="user" type="text" placeholder="userame">
 
                         <label for="password">Your Password</label>
                         <input id="password" type="password" placeholder="password">
 
-                        <button type="submit" class="pure-button">Sign In</button>
-                        <button type="submit" class="pure-button">New Account</button>
+                        <button type="login" class="pure-button">SIGN IN</button>
+                        <button type="createUser" class="pure-button">NEW USER</button>
                     </fieldset>
                 </form>
             </div>
 
             <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
-                <h4>Contact Us</h4>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.
+                    Already have an account! Type in your username and password and 
+                    click SIGN IN. Do not have an account, don't worry, enter a username
+                    and password and click NEW USER.
+                </p>
+            </div>
+        </div>
+
+    </div>
+   <div class="content">
+        <h2 class="content-head is-center">Sign in or create a new user</h2>
+
+        <div class="pure-g">
+            <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
+                <form class="pure-form pure-form-stacked">
+                    <fieldset>
+
+                        <label for="user2">Your Userame</label>
+                        <input id="user2" type="text" placeholder="userame">
+
+                        <label for="password2">Your Password</label>
+                        <input id="password2" type="password" placeholder="password">
+
+                        <button type="login" class="pure-button">SIGN IN</button>
+                        <button type="createUser" class="pure-button">NEW USER</button>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
+                <p>
+                    Already have an account! Type in your username and password and 
+                    click SIGN IN. Do not have an account, don't worry, enter a username
+                    and password and click NEW USER.
                 </p>
             </div>
         </div>
@@ -157,7 +211,7 @@
     </div>
 
     <div class="footer l-box is-center">
-        View the source of this layout to learn more. Made with love by the YUI Team.
+        By Ching Wing (Winny) Cheng
     </div>
 
 </div>
