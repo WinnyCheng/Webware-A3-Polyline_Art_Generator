@@ -121,8 +121,9 @@ app.post( '/generate', function( request, response ) {
   response.end()
 })
 app.post( '/delete', function( request, response ) {
-  let index = request.body.index
-  appdata.splice(index, 1)
+  let object = db.get('posts']').value()
+  db.get('posts').remove(object).write()
+  console.log(db.get('post').value())
   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
   response.end()
 })
