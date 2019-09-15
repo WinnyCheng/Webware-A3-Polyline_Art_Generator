@@ -42,13 +42,7 @@ const users = [
   {username: 'admin', password: 'iammi'}
 ]
 db.defaults({ post: appdata, user: users }).write()
-
-app.get('/getDrawings', (req, res) => {
-  const data = db.get('post').value()
-  const type = mime.getType( data ) 
-  res.writeHeader(200, { 'Content-Type': type })
-  res.end(JSON.stringify(data));
-})
+console.log(db.get('post').value())
 
 function randPoints(numPoints){
   let pointlist = []
@@ -101,11 +95,12 @@ passport.deserializeUser( ( username, done ) => {
   }
 })
 
-// app.get( '/getDrawings', function( request, response) {
-//   const type = mime.getType( appdata ) 
-//   response.writeHeader(200, { 'Content-Type': type })
-//   response.end(JSON.stringify(appdata));
-// })
+app.get('/getDrawings', (req, res) => {
+  const data = db.get('post').value()
+  const type = mime.getType( data ) 
+  res.writeHeader(200, { 'Content-Type': type })
+  res.end(JSON.stringify(data));
+})
 app.post( '/generate', function( request, response ) {
   let data = request.body
   //generate random number for points
@@ -117,13 +112,14 @@ app.post( '/generate', function( request, response ) {
     "numPoly": data.numPoly, 
     "name": data.name,
     "points": points,
-    "triangles": triangles
+    "triangles": triangles,
+    "user": data.user
   }
 
-  appdata.push(drawing)
-  
-  response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
-  response.end()
+  db.get('post').value().push(drawing).write().then(function(response) {
+    response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+    response.end()
+  })
 })
 app.post( '/delete', function( request, response ) {
   let index = request.body.index

@@ -1,6 +1,8 @@
+let username
+
 const login = function(e){
   e.preventDefault()
-  let username = document.getElementById("user").value
+  username = document.getElementById("user").value
   let password = document.getElementById("password").value
   
   const data = JSON.stringify({ username: username, password: password })
@@ -16,6 +18,7 @@ const login = function(e){
     if( response.status === 200){
       document.getElementById("loginPage").style.display = "none";
       document.getElementById("page").style.display = "";
+      document.getElementByiD('username').innerText = "Username: " + username
     }
     else{
       document.getElementById("errorMessage").innerText = "incorrect username or password"
@@ -35,6 +38,7 @@ const generate = function(e) {
   // prevent default form action from being carried out
   e.preventDefault()
   const data = JSON.stringify(grabInput("numPoly", "vertices", "name"))
+  data.user = username
   
   fetch( '/generate', {
     method:'POST',
