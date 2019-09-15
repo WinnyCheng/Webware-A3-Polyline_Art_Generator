@@ -42,7 +42,7 @@ const users = [
   {username: 'admin', password: 'iammi'},
   {username: 'winny', password: 'iloveanime'}
 ]
-db.defaults({ post: appdata, user: users }).write()
+db.defaults({ post: appdata, users: users }).write()
 
 function randPoints(numPoints){
   let pointlist = []
@@ -68,7 +68,7 @@ app.use( express.static(dir) )
 app.use( bodyParser.json() )
 
 const myLocalStrategy = function( username, password, done ){
-  const user = users.find( __user => __user.username === username )
+  const user = db.get('users').value().find( __user => __user.username === username )
   if( user === undefined ){
     return done(null, false, { message: 'user not found'})}
   else if( user.password === password )
@@ -85,7 +85,7 @@ app.use( passport.session() )
 passport.serializeUser( ( user, done ) => done( null, user.username ) )
 
 passport.deserializeUser( ( username, done ) => {
-  const user = db.get('user').value().find( u => u.username === username )
+  const user = db.get('users').value().find( u => u.username === username )
   console.log( 'deserializing:', username )
   
   if( user !== undefined ) {
@@ -146,7 +146,7 @@ app.post( '/update', function( request, response ) {
 })
 
 app.post( '/createUser', (req, res) => {
- db.get('user').push(req.body).write()
+ db.get('users').push(req.body).write()
   
   res.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
   res.end()

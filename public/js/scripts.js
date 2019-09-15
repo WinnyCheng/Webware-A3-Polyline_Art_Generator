@@ -40,6 +40,7 @@ const newUser = function(e) {
   let password = document.getElementById("password").value
   
   const data = JSON.stringify({ username: username, password: password })
+  console.log(data)
   
   fetch( '/createUser', {
     method: 'POST',
@@ -200,7 +201,7 @@ window.onload = function() {
   const genBtn = document.getElementById("generate")
   genBtn.onclick = generate
   const create = document.getElementById("createUser")
-  create.onclink = newUser
+  create.onclick = newUser
 }
 
 //********************************* WebGL Code *****************************************************
