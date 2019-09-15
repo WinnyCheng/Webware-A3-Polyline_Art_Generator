@@ -33,6 +33,28 @@ const login = function(e){
   .catch( err => console.error ) 
 }
 
+const newUser = function(e) {
+  // prevent default form action from being carried out
+  e.preventDefault()
+  username = document.getElementById("user").value
+  let password = document.getElementById("password").value
+  
+  const data = JSON.stringify({ username: username, password: password })
+  
+  fetch( '/createUser', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: data
+  })
+  .then( function( response ) {
+    document.getElementById('username').innerText = "User: " + username
+    document.getElementById("loginPage").style.display = "none";
+    document.getElementById("page").style.display = "";
+    getData()
+  })
+  return false
+}
+
 const generate = function(e) {
   // prevent default form action from being carried out
   e.preventDefault()
@@ -46,6 +68,9 @@ const generate = function(e) {
   })
   .then( function( response) {
     getData()
+    document.getElementById("numPoly").value = null
+    document.getElementById("vertices").value = null
+    document.getElementById("name").value = null
   })
   return false
 }
@@ -174,6 +199,8 @@ window.onload = function() {
   loginBtn.onclick = login
   const genBtn = document.getElementById("generate")
   genBtn.onclick = generate
+  const create = document.getElementById("createUser")
+  create.onclink = newUser
 }
 
 //********************************* WebGL Code *****************************************************

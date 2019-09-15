@@ -145,6 +145,12 @@ app.post( '/update', function( request, response ) {
   response.end()
 })
 
+app.post( '/createUser', (req, res) => {
+ db.get('user').push(req.body).write()
+  
+  res.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+  res.end()
+})
 app.post( '/login',
          passport.authenticate( 'local'),
          function( request, response ) {
