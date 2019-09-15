@@ -41,8 +41,10 @@ canvas{
   display: flex;
   align-self: center;
   justify-self: center;
-  border: 10px solid #34495e;
+  border: 10px solid #1f8dd6;
 }
+
+
 
 /*
  * -- LAYOUT STYLES --
@@ -74,10 +76,10 @@ canvas{
 }
 
 .pure-form input[type] {
-    border: 2px solid #ddd;
+    border: 3px double #1f8dd6;
     box-shadow: none;
     font-size: 100%;
-    width: 100%;
+    width: 75%;
     margin-bottom: 1em;
 }
 
