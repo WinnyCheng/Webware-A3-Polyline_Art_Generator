@@ -47,7 +47,7 @@ canvas{
   justify-self: center;
   border: 10px solid #1f8dd6;
 }
-#errorMessage{
+#errorMessage, #errorInput{
   color: red;
 }
 input{

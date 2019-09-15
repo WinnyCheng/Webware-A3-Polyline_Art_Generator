@@ -79,6 +79,13 @@ const generate = function(e) {
   const data = grabInput("numPoly", "vertices", "name")
   data.user = username
   
+  if(data.numPoly < 1 || data.vertices < 1){
+    document.getElementById("errorInput").innerText = "* please input a value of 1 or greater *"
+    return
+  }
+  
+  document.getElementById("errorInput").innerText = ""
+  
   fetch( '/generate', {
     method:'POST',
     headers: { 'Content-Type': 'application/json' },
