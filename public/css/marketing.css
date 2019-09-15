@@ -29,8 +29,12 @@ label {
     height: auto;
 }
 
-td{
-  margin-left: 50px;
+th{
+  color: white;
+}
+table{
+  display: flex;
+  justify-content: center;
 }
 
 /*
