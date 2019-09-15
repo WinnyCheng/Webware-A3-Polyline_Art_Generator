@@ -116,26 +116,29 @@ app.post( '/generate', function( request, response ) {
   }
 
   db.get('post').push(drawing).write()
-  console.log(db.get('post').value())
+  
   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
   response.end()
 })
 app.post( '/delete', function( request, response ) {
-  let object = db.get('posts']').value()
-  db.get('posts').remove(object).write()
-  console.log(db.get('post').value())
+  let object = db.get('post').value()[request.body.index]
+  db.get('post').remove(object).write()
+  
   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
   response.end()
 })
 app.post( '/update', function( request, response ) {
   let newData = request.body
   let idx = newData.idx
-
-  appdata[idx].vertices = newData.vertices
-  appdata[idx].numPoly = newData.numPoly
-  appdata[idx].name = newData.name
-  appdata[idx].points = randPoints(newData.vertices)
-  appdata[idx].triangles = randTri(newData.numPoly, newData.vertices)
+  let object = db.get('post').value()[idx]
+  
+  db.get('post').find(object).assign({
+    vertices: newData.vertices,
+    numPoly: newData.numPoly,
+    name: newData.name,
+    points: randPoints(newData.vertices),
+    triangles: randTri(newData.numPoly, newData.vertices)
+  }).write()
   
   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
   response.end()
