@@ -38,10 +38,7 @@ table {
   justify-content: center;
 }
 th, td{
-  padding-right: 20px;
-}
-td{
-  align-text: center
+  padding-right: 150px;
 }
 canvas{
   background: black;
@@ -50,7 +47,12 @@ canvas{
   justify-self: center;
   border: 10px solid #1f8dd6;
 }
-
+#errorMessage{
+  color: red;
+}
+input{
+  color: black;
+}
 
 
 /*

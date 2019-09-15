@@ -21,7 +21,7 @@ const login = function(e){
       getData()
     }
     else{
-      document.getElementById("errorMessage").innerText = "incorrect username or password"
+      document.getElementById("errorMessage").innerText = "* incorrect username or password *"
       document.getElementById("user").value = null
       document.getElementById("password").value = null
     }
