@@ -1,10 +1,11 @@
+var username
+
 const login = function(e){
   e.preventDefault()
-  let username = document.getElementById("user").value
+  username = document.getElementById("user").value
   let password = document.getElementById("password").value
   
   const data = JSON.stringify({ username: username, password: password })
-  console.log(data)
   
   fetch( '/login', {
     method: 'POST',
@@ -12,11 +13,11 @@ const login = function(e){
     body: data
   })
   .then( function( response ) {
-    console.log(response)
     if( response.status === 200){
+      document.getElementById('username').innerText = "User: " + username
       document.getElementById("loginPage").style.display = "none";
       document.getElementById("page").style.display = "";
-      document.getElementById('username').innerText = "User: " + username
+      getData()
     }
     else{
       document.getElementById("errorMessage").innerText = "incorrect username or password"
@@ -32,17 +33,11 @@ const login = function(e){
   .catch( err => console.error ) 
 }
 
-function getUser(){
-  return document.getElementById('username').innerText.substring(6)
-}
-
 const generate = function(e) {
   // prevent default form action from being carried out
   e.preventDefault()
   const data = grabInput("numPoly", "vertices", "name")
-  data.user = getUser()
-  
-  console.log(data)
+  data.user = username
   
   fetch( '/generate', {
     method:'POST',
@@ -87,8 +82,6 @@ function genTable(dataList, idx) {
   
   let i = 0
   for(let d of dataList){
-    console.log(d.user)
-    console.log(getUser())
     if(idx === i){
       str += "<tr>"+
                 "<td>" + 
@@ -103,7 +96,7 @@ function genTable(dataList, idx) {
                 "</td>"
               "</tr>"
     }
-    else if(d.user === getUser()) {
+    else if(d.user === username) {
       str += "<tr>"+
                 "<td>"+ d.vertices +"</td>" + 
                 "<td>"+ d.numPoly +"</td>" + 
@@ -179,7 +172,6 @@ function updateData(index){
 window.onload = function() {
   const loginBtn = document.getElementById("login")
   loginBtn.onclick = login
-  getData()
   const genBtn = document.getElementById("generate")
   genBtn.onclick = generate
 }
