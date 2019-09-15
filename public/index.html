@@ -21,6 +21,10 @@
         <!--[if gt IE 8]><!-->
             <link rel="stylesheet" href="css/marketing.css">
         <!--<![endif]-->
+  
+  <script src="js/webgl-utils.js"></script>
+    <script src="js/initShaders.js"></script>
+    <script src="js/MV.js"></script>
   <script id="vshader" type="x-shader/x-vertex">
 
       attribute vec4 vPosition;
@@ -149,7 +153,7 @@
         </div>
     </div>
 
-    <div class="content">
+    <div class="content" id="loginPage">
         <h2 class="content-head is-center">Sign in or create a new user</h2>
 
         <div class="pure-g">
@@ -163,8 +167,8 @@
                         <label for="password">Your Password</label>
                         <input id="password" type="password" placeholder="password">
 
-                        <button type="login" class="pure-button">SIGN IN</button>
-                        <button type="createUser" class="pure-button">NEW USER</button>
+                        <button id="login" class="pure-button">SIGN IN</button>
+                        <button id="createUser" class="pure-button">NEW USER</button>
                     </fieldset>
                 </form>
             </div>
@@ -179,36 +183,36 @@
         </div>
 
     </div>
-   <div class="content">
-        <h2 class="content-head is-center">Sign in or create a new user</h2>
-
-        <div class="pure-g">
-            <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
-                <form class="pure-form pure-form-stacked">
-                    <fieldset>
-
-                        <label for="user2">Your Userame</label>
-                        <input id="user2" type="text" placeholder="userame">
-
-                        <label for="password2">Your Password</label>
-                        <input id="password2" type="password" placeholder="password">
-
-                        <button type="login" class="pure-button">SIGN IN</button>
-                        <button type="createUser" class="pure-button">NEW USER</button>
-                    </fieldset>
-                </form>
+   <div class="content" id="page" style="display:none">
+        <h2 class="content-head is-center">Let's start the generation</h2>
+        <p id="username"></p>
+        <button id="logout">Logout</button>
+        <form action="">
+          <div id="input">
+            <div>
+              <p>Please enter the number of vertices (1 - 50).</p>
+              <input type="number" id="vertices" placeholder="15">
+            </div> 
+            <div>
+              <p>Please enter the number of triangles (1 - 50).</p>
+              <input type="number" id="numPoly" placeholder="12">
             </div>
-
-            <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
-                <p>
-                    Already have an account! Type in your username and password and 
-                    click SIGN IN. Do not have an account, don't worry, enter a username
-                    and password and click NEW USER.
-                </p>
+            <div>
+              <p>Please enter a name for your to be generated art piece.</p>
+              <input type="text" id="name" placeholder="The Legendary Scribble">
             </div>
+            <button id="generate">Generate</button>
+          </div>
+        </form>
+        <div id="canvas">
+          <canvas id="webGL" width="600" height="600"> 
+            Please use a brower that supports the "canvas" tag.
+          </canvas>
         </div>
-
-    </div>
+        <div id="table">
+          <table id="dataTable"></table>
+        </div>
+      </div>
 
     <div class="footer l-box is-center">
         By Ching Wing (Winny) Cheng
@@ -218,4 +222,5 @@
 
 
 </body>
+<script src="js/scripts.js"></script>
 </html>
