@@ -42,6 +42,7 @@ const users = [
   {username: 'admin', password: 'iammi'},
   {username: 'winny', password: 'iloveanime'}
 ]
+
 db.defaults({ post: appdata, users: users }).write()
 
 function randPoints(numPoints){
@@ -161,5 +162,7 @@ app.post('/test', function( req, res ) {
   console.log( 'authenticate with cookie?', req.user )
   res.json({ status:'success' })
 })
+
+console.log(db.get("post").value())
 
 app.listen( process.env.PORT || port )

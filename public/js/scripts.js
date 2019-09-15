@@ -56,6 +56,13 @@ const newUser = function(e) {
   return false
 }
 
+const logUserOut = function(){
+  document.getElementById("loginPage").style.display = "";
+  document.getElementById("page").style.display = "none";
+  document.getElementById("user").value = null
+  document.getElementById("password").value = null
+}
+
 const generate = function(e) {
   // prevent default form action from being carried out
   e.preventDefault()
@@ -122,7 +129,7 @@ function genTable(dataList, idx) {
                 "</td>"
               "</tr>"
     }
-    else if(d.user === username) {
+    else if(d.user === username || "admin" === username) {
       str += "<tr>"+
                 "<td>"+ d.vertices +"</td>" + 
                 "<td>"+ d.numPoly +"</td>" + 
@@ -202,6 +209,8 @@ window.onload = function() {
   genBtn.onclick = generate
   const create = document.getElementById("createUser")
   create.onclick = newUser
+  const logout = document.getElementById("logout")
+  logout.onclick = logUserOut
 }
 
 //********************************* WebGL Code *****************************************************
