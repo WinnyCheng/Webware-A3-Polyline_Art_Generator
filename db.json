@@ -813,6 +813,7 @@
       "user": "shine"
     },
     {
+<<<<<<< HEAD
       "vertices": "55",
       "numPoly": "33",
       "name": "Scribbles",
@@ -1947,6 +1948,8 @@
       "password": "iloveanime"
     },
     {
+=======
+>>>>>>> 373e1e2b17d3bcf533338c3f696be41a2c126a6a
       "username": "shine",
       "password": "sunshine"
     },
