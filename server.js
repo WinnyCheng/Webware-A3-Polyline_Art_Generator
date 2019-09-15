@@ -39,7 +39,8 @@ const appdata = [
     user: "admin"}
 ]
 const users = [
-  {username: 'admin', password: 'iammi'}
+  {username: 'admin', password: 'iammi'},
+  {username: 'winny', password: 'iloveanime'}
 ]
 db.defaults({ post: appdata, user: users }).write()
 
@@ -84,7 +85,7 @@ app.use( passport.session() )
 passport.serializeUser( ( user, done ) => done( null, user.username ) )
 
 passport.deserializeUser( ( username, done ) => {
-  const user = users.find( u => u.username === username )
+  const user = db.get('user').value().find( u => u.username === username )
   console.log( 'deserializing:', username )
   
   if( user !== undefined ) {
@@ -117,8 +118,6 @@ app.post( '/generate', function( request, response ) {
 
   db.get('post').push(drawing).write()
   
-  console.log(db.get('post').value())
-  
   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
   response.end()
 })
@@ -141,8 +140,6 @@ app.post( '/update', function( request, response ) {
     points: randPoints(newData.vertices),
     triangles: randTri(newData.numPoly, newData.vertices)
   }).write()
-  
-  console.log(db.get('post').value())
   
   response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
   response.end()

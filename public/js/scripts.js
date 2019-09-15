@@ -33,7 +33,7 @@ const login = function(e){
 }
 
 function getUser(){
-  return document.getElementById('username').innerText
+  return document.getElementById('username').innerText.substring(6)
 }
 
 const generate = function(e) {
@@ -87,6 +87,8 @@ function genTable(dataList, idx) {
   
   let i = 0
   for(let d of dataList){
+    console.log(d.user)
+    console.log(getUser())
     if(idx === i){
       str += "<tr>"+
                 "<td>" + 
@@ -101,7 +103,7 @@ function genTable(dataList, idx) {
                 "</td>"
               "</tr>"
     }
-    else{
+    else if(d.user === getUser()) {
       str += "<tr>"+
                 "<td>"+ d.vertices +"</td>" + 
                 "<td>"+ d.numPoly +"</td>" + 
@@ -110,6 +112,16 @@ function genTable(dataList, idx) {
                   "<button id='v" + i + "' onclick='drawData(" + i + ")'>View</button>" +
                   "<button id='e" + i + "' onclick='editData(" + i + ")'>Edit</button>" +
                   "<button id='d" + i + "'onclick='deleteData(" + i +")'>Delete</button>" +
+                "</td>"
+              "</tr>"
+    }
+    else{
+      str += "<tr>"+
+                "<td>"+ d.vertices +"</td>" + 
+                "<td>"+ d.numPoly +"</td>" + 
+                "<td>"+ d.name +"</td>" +
+                "<td>" + 
+                  "<button id='v" + i + "' onclick='drawData(" + i + ")'>View</button>" +
                 "</td>"
               "</tr>"
     }
