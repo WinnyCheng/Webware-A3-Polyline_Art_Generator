@@ -1,18 +1,30 @@
-Assignment 2 - Short Stack: Basic Two-tier Web Application using HTML/CSS/JS and Node.js  
+Assignment 3 - Persistence: Two-tier Web Application with Flat File Database, Express server, and CSS template
 ===
-## Random Drawing Generator
+## Polyline Art Generator
+https://winnycheng-a3.glitch.me/
 
-The website is a generator that creates a 3D image using multiple triangles. The User inputs the number of vertices (number of points) and the number of triangles to draw. It randomly generates the (x, y, z) coordinates for a specificed number of points and draws the specificed number of triangles from randomly picked points. The generated drawing is displayed on the right. The last input is for giving the creation a name. The user can also translate and rotate the drawing using special characters: !, @, #, $, %, ^, and &.
+The website allows user to either sign in if they have an account or create a new account. Once the user is signed in they can create a polyline art simply by inputing the number vertices, the number of triangles to draw and a name. The user can view all the polylines drawings ever generated but can only edit or delete their own polyline drawings. If the user is the admin, they can edit and delete any thing in the database.
 
-https://winnycheng-a2-shortstack.glitch.me/
+The goal was to create an application with a server using express and have a persistant database. The greatest challenges was understanding the workings of passport local authentication and the workings and location of the database file. Glitch does automatically update with a database file so the file was not visible till the code was pushed and then pulled. I chose passport local authentication and lowdb database for the authentication and database because they were discussed in class and I have no other knowledge of other authentication systems nor databases. I used PURE as it had a template layout I liked. I added a few little things to the CSS such as adding borders to the input and button tags, placing and formatting the table, and placing the canvas item to the right of the inputs.  
+
+Here are some users I created:
+- **username**: admin, **password**: iammi
+- **username**: winny, **password**: iloveanime
+- **username**: shine, **password**: sunshine
+
+**Express Middleware Packages**
+- express: used for server framework, making requests like post and get
+- express.static: serve static files
+- passport: authentication for logins and cookies
+- body-parser: parses the data passed in with the request
+- express-session: establish server-based sessions
 
 ## Technical Achievements
-- **Random Number Generation**: Generated random x, y, z values (ranging from -1 to 1) for n number of vertices (points) specified by the user. Randomly pick out of those points to form x number of triangles also specified by the user. The first two on the list (Cube and Triangular Pyramid) was not randomly generated. They are specified points and triangles made by me. (If they are unedited. If edited, the points and triangles will be replaced by random generated ones.)
-- **Implementing a 3D drawing canvas using WebGL**: Transforming an old WebGL project to draw a 3D object based on randomly generated coordinates and randomly picked coordinates to form multiple triangles to form a triangle mesh. 
-
+- **Create User**: I added a list of users and passwords to the database so new users can be created
+- **Logout**: A logout button was implemented allowing users to logout (brings them back to login screen)
+- **Error Checking**: User cannot create a new account with a username that already exists, users cannot input negative values for number of vertices and number of triangles.
 
 ### Design/Evaluation Achievements
-- **Adding view button**: Redraws (can view) any other creations in the data list.  
-- **Self wrote CSS code**: Colors, Font, format was all manually written. Used flex and grid to format page. Exernal templates were not used. 
+- **Design Achievement 1**: Implemented a CSS template layout and editing some of it to fit my webpage
 
 Ching Wing (Winny) Cheng 
